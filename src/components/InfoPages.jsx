@@ -187,7 +187,7 @@ const InfoPagesContainer = styled.section`
 const InfoPagesItem = styled.section`
     background: #FFFF;
     width: 100%;
-    height: 10em;
+    height: 9em;
 
     ${({ grau }) => grau ? `background: #BFBFBF;` : ``}
 `;
