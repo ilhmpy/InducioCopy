@@ -12,6 +12,8 @@ export const GlobalStyles = createGlobalStyle`
         display: flex;
         overflow-x: hidden;
         justify-content: center;
+        font-family: 'Raleway', sans-serif;
+        height: 3000px;
     }
 
     h1, h2, h3 {
@@ -36,5 +38,9 @@ export const GlobalStyles = createGlobalStyle`
 
     #root {
         height: 100%;
+    }
+
+    a {
+        cursor: pointer;
     }
 `;

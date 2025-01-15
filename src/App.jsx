@@ -5,11 +5,15 @@ import { Navigation } from "./components";
 
 const App = () => {
   const routing = useRoutes([
-    { path: "/", element: <>
-      <Navigation>
-        <Home />
-      </Navigation>
-    </> }
+    { 
+      path: "/", 
+      element: 
+        <>
+          <Navigation>
+            <Home />
+          </Navigation>
+        </> 
+      }
   ]);
 
   return routing;
