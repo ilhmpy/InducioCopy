@@ -1,8 +1,8 @@
 import styled from "styled-components"
 
-export const Container = ({ children, flex }) => {
+export const Container = ({ children, flex, flexCenter }) => {
     return (
-        <ContentContainer flex={flex}>
+        <ContentContainer flex={flex} flexCenter={flexCenter}>
             {children}
         </ContentContainer>
     )
@@ -19,4 +19,6 @@ const ContentContainer = styled.div`
         display: flex;
         justify-content: space-between;
     ` : ``}
+    
+    ${({ flexCenter }) => flexCenter ? `justify-content: center; align-items: center;` : ``}
 `;

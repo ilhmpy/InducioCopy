@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import AdobeStock from "./imgs/AdobeStock.webp";
 
 export const GlobalStyles = createGlobalStyle`
     * {
@@ -9,11 +10,13 @@ export const GlobalStyles = createGlobalStyle`
         margin: 0;
         padding: 0;
         height: 100vh;
-        display: flex;
-        overflow-x: hidden;
-        justify-content: center;
         font-family: 'Raleway', sans-serif;
         height: 3000px;
+        background-image: url(${AdobeStock});
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
     }
 
     h1, h2, h3 {

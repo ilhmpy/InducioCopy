@@ -2,8 +2,24 @@ import styled from "styled-components";
 import { Container } from "./Container";
 import logo from "../imgs/Inducio.webp";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+
 
 export const Navigation = ({ children }) => {
+    const [scrollY, setScrollY] = useState(0);
+
+    useEffect(() => {
+        const handleScroll = () => {
+          setScrollY(window.scrollY);
+        };
+    
+        window.addEventListener('scroll', handleScroll);
+    
+        return () => {
+          window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
     return (
         <NavigationContainer>
             <NavigationMenu>
@@ -20,9 +36,7 @@ export const Navigation = ({ children }) => {
                     </NavigationLinksContainer>
                 </Container>
             </NavigationMenu>
-            <Container>
-                {children}
-            </Container>
+            {children}
         </NavigationContainer>
     );
 }
@@ -44,7 +58,7 @@ const NavigationContainer = styled.div`
 `;
 
 const NavigationMenu = styled.div`
-    width: 1920px;
+    width: 100%;
     display: flex;
     background: #FFF;
     justify-content: center;
