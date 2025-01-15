@@ -11,7 +11,6 @@ export const GlobalStyles = createGlobalStyle`
         padding: 0;
         height: 100vh;
         font-family: 'Raleway', sans-serif;
-        height: 3000px;
         background-image: url(${AdobeStock});
         background-repeat: no-repeat;
         background-size: cover;
@@ -45,5 +44,11 @@ export const GlobalStyles = createGlobalStyle`
 
     a {
         cursor: pointer;
+    }
+
+    textarea {
+        outline: none; 
+        border: none; 
+        resize: none;
     }
 `;
