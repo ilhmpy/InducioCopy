@@ -1,5 +1,5 @@
 import React from "react";
-import { InfoPages, PageDesc, Slider } from "../components";
+import { InfoPages, PageDesc, Slider, YearsStatistic } from "../components";
 
 export const Home = () => {
     return (
@@ -7,6 +7,7 @@ export const Home = () => {
             <PageDesc />
             <InfoPages />
             <Slider />
+            <YearsStatistic />
         </>
     )
 }
