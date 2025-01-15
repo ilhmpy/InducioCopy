@@ -32,7 +32,7 @@ export const PageDesc = () => {
 
 const PageDescContainer = styled.section`
     width: 100%;
-    height: 27em;
+    height: 27.5em;
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
