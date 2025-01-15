@@ -3,6 +3,7 @@ import { Container } from "./Container";
 import logo from "../imgs/Inducio.webp";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Footer } from "./Footer";
 
 
 export const Navigation = ({ children }) => {
@@ -37,6 +38,7 @@ export const Navigation = ({ children }) => {
                 </Container>
             </NavigationMenu>
             {children}
+            <Footer />
         </NavigationContainer>
     );
 }
