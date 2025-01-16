@@ -1,12 +1,12 @@
 import React from "react";
-import { InfoPages, PageDesc, Slider, YearsStatistic, Kontakt } from "../components";
+import { InfoPages, PageDesc, YearsStatistic, Kontakt, SliderSection } from "../components";
 
 export const Home = () => {
     return (
         <>
             <PageDesc />
             <InfoPages />
-            <Slider />
+            <SliderSection />
             <YearsStatistic />
             <Kontakt />
         </>

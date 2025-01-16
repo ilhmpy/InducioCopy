@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { Container } from "./Container";
 import logo from "../imgs/Inducio.webp";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -8,10 +8,27 @@ import { Footer } from "./Footer";
 
 export const Navigation = ({ children }) => {
     const [scrollY, setScrollY] = useState(0);
+    
+    const standartStyled = {
+        top: "-100vh",
+    }
+    
+    const [absoluteStyled, setAbsoluteStyled] = useState(standartStyled);
 
     useEffect(() => {
         const handleScroll = () => {
           setScrollY(window.scrollY);
+
+          if (window.scrollY > 350) {
+            setAbsoluteStyled({
+                top: '0'
+            })
+          } else {
+            setAbsoluteStyled({
+                ...standartStyled,
+                transition: 0
+            })
+          }
         };
     
         window.addEventListener('scroll', handleScroll);
@@ -19,28 +36,37 @@ export const Navigation = ({ children }) => {
         return () => {
           window.removeEventListener('scroll', handleScroll);
         };
-    }, []);
+    }, [scrollY]);
 
     return (
         <NavigationContainer>
-            <NavigationMenu>
-                <Container flex>
-                    <NavigationLinksContainer>
-                        <Logo src={logo} />
-                        <NavigationMenuLink to="/">Home</NavigationMenuLink>
-                        <NavigationMenuLink to="/contactus">Kontakt</NavigationMenuLink>
-                        <NavigationMenuLink to="/karriere">Karriere</NavigationMenuLink>
-                    </NavigationLinksContainer>
-                    <NavigationLinksContainer gap=".5">
-                        <NavigationLinksButton>Anmelden</NavigationLinksButton>
-                        <NavigationLinksButton kntk>Kontaktieren Sie uns</NavigationLinksButton>
-                    </NavigationLinksContainer>
-                </Container>
-            </NavigationMenu>
-            {children}
+            <NavigationMenu />
+            <NavigationMenu absolute={absoluteStyled} />
+            <Flex1Container>
+                {children}
+            </Flex1Container>
             <Footer />
         </NavigationContainer>
     );
+}
+
+const NavigationMenu = ({ absolute }) => {
+    return (
+        <NavigationMenuContainer absolute={absolute}>
+            <Container flex>
+                <NavigationLinksContainer>
+                    <Logo src={logo} />
+                    <NavigationMenuLink to="/">Home</NavigationMenuLink>
+                    <NavigationMenuLink to="/contactus">Kontakt</NavigationMenuLink>
+                    <NavigationMenuLink to="/karriere">Karriere</NavigationMenuLink>
+                </NavigationLinksContainer>
+                <NavigationLinksContainer gap=".5">
+                    <NavigationLinksButton>Anmelden</NavigationLinksButton>
+                    <NavigationLinksButton kntk>Kontaktieren Sie uns</NavigationLinksButton>
+                </NavigationLinksContainer>
+            </Container>
+        </NavigationMenuContainer>
+    )
 }
 
 const NavigationMenuLink = ({ children, to }) => {
@@ -59,13 +85,26 @@ const NavigationContainer = styled.div`
     height: 100%;
 `;
 
-const NavigationMenu = styled.div`
+
+const NavigationMenuContainer = styled.div`
     width: 100%;
     display: flex;
     background: #FFF;
     justify-content: center;
     align-items: center;
     height: 3.5em;
+    transition: .6s;
+
+    ${({ absolute }) => {
+        if (absolute) {
+            return `
+                position: fixed;
+                z-index: 99999;
+                top: ${absolute.top};
+
+            `
+        }
+    }}
 `;
 
 const Logo = styled.img`
@@ -125,4 +164,8 @@ const NavigationLinksButton = styled.button`
              }
             `
     }
+`;
+
+const Flex1Container = styled.section`
+    flex: 1;
 `;

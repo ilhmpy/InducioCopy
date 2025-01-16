@@ -37,6 +37,8 @@ const FooterContainer = styled.footer`
     width: 100%;
     height: 15em;
     display: grid;
+    position: relative;
+    flex: 0 0 auto;
     grid-template-rows: 75% 25%;
 `;
 

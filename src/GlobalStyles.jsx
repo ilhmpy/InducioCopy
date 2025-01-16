@@ -9,7 +9,8 @@ export const GlobalStyles = createGlobalStyle`
     body {
         margin: 0;
         padding: 0;
-        height: 100vh;
+        min-height: 100vh;
+        height: 100%;
         font-family: 'Raleway', sans-serif;
         background-image: url(${AdobeStock});
         background-repeat: no-repeat;

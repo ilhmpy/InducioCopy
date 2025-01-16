@@ -182,6 +182,7 @@ export const InfoPages = () => {
 
 const InfoPagesContainer = styled.section`
     width: 100%;
+    z-index: -999999999;
 `;
 
 const InfoPagesItem = styled.section`
