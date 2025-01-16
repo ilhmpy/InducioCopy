@@ -96,6 +96,7 @@ const NavigationMenuContainer = styled.div`
     align-items: center;
     height: 3.5em;
     transition: .6s;
+    border-bottom: 1px solid #6C757D;
 
     ${({ absolute }) => {
         if (absolute) {

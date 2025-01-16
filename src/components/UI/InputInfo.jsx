@@ -1,8 +1,7 @@
 import styled from "styled-components"
 
-export const InputInfo = ({ desc, area, children, dark }) => {
+export const InputInfo = ({ desc, area, children, dark, placeholder, alone, style }) => {
     if (children) {
-        console.log(children)
         return (
             <InputInfoContainer>
                 <span></span>
@@ -11,13 +10,15 @@ export const InputInfo = ({ desc, area, children, dark }) => {
         )
     } else {
         return (
-            <InputInfoContainer dark={dark}>
-                <span>{desc}</span>
+            <InputInfoContainer dark={dark} alone={alone}>
+                {alone ? "" : (
+                    <span>{desc}</span>
+                )}
                 {
                     area ? (
-                        <InArea dark={dark} />
+                        <InArea style={style} focus dark={dark} placeholder={placeholder ? placeholder : ""} alone={alone} />
                     ) : (
-                        <Input dark={dark} />
+                        <Input style={style} focus dark={dark} placeholder={placeholder ? placeholder : ""} alone={alone} />
                     )
                 }
             </InputInfoContainer>
@@ -30,8 +31,11 @@ const InputInfoContainer = styled.div`
     color: #FFF;
     display: grid;
     align-items: center;
-    grid-template-columns: 20% 80%;
     margin-bottom: 1.1em;
+
+    ${({ alone }) => alone ? "" : `
+        grid-template-columns: 20% 80%;
+    `}
 
     ${({ dark }) => {
         if (dark) {
@@ -47,7 +51,7 @@ const Input = styled.input`
     background: #FFFF;
     height: 2.5em;
     font-weight: 500;
-    border-radius: .3em;
+    border-radius: .5em;
     font-size: 1em;
 
     ${({ dark }) => {
@@ -57,6 +61,18 @@ const Input = styled.input`
             `;
         }
     }}
+
+    ${({ alone }) => {
+        if (alone) {
+            return `
+                width: 100%;
+            `
+        }
+    }}
+
+    &:focus {
+        border: 5px solid #DBDCDE;
+    }
 `;
 
 const InArea = styled.textarea`
@@ -73,4 +89,16 @@ const InArea = styled.textarea`
             `;
         }
     }}
+
+    ${({ alone }) => {
+        if (alone) {
+            return `
+                width: 100%;
+            `
+        }
+    }}
+    
+    &:focus {
+            border: 5px solid #DBDCDE;
+    }
 `;
