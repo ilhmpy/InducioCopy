@@ -1,5 +1,6 @@
 import styled from "styled-components"
-import { Container } from "./Container"
+import { Container } from "./Container";
+import { InputInfo, InfoButton } from "./UI";
 
 export const Kontakt = () => {
     return (
@@ -14,30 +15,12 @@ export const Kontakt = () => {
                     </KontaktH3>
                 </KontaktDesc>
                 <div>
-                    <InputInfo>
-                        <span>Ihr Name</span>
-                        <Input />
-                    </InputInfo>
-                    <InputInfo>
-                        <span>Telefon</span>
-                        <Input />
-                    </InputInfo>
-                    <InputInfo>
-                        <span>Ihre E-Mail *</span>
-                        <Input />
-                    </InputInfo>
-                    <InputInfo>
-                        <span>Ihr Unternehmen</span>
-                        <Input />
-                    </InputInfo>
-                    <InputInfo>
-                        <span>Betreff *</span>
-                        <Input />
-                    </InputInfo>
-                    <InputInfo>
-                        <span>Ihre Anfrage *</span>
-                        <InArea />
-                    </InputInfo>
+                    <InputInfo desc={"Ihre Name"} />
+                    <InputInfo desc={"Telefon"} />
+                    <InputInfo desc={"Ihre E-Mail"} />
+                    <InputInfo desc={"Ihr Unternehmen"} />
+                    <InputInfo desc={"Betreff *"} />
+                    <InputInfo desc={"Ihre Anfrage"} area />
                     <InputInfo>
                         <span></span>
                         <InfoButton>
@@ -79,7 +62,7 @@ const KontaktDesc = styled.div`
     text-align: center;
     padding-top: 1em;
 `;
-
+/* 
 const InputInfo = styled.div`
     width: 100%;
     color: #FFF;
@@ -106,16 +89,4 @@ const InArea = styled.textarea`
     font-size: 1.3em;
 `;
 
-const InfoButton = styled.button`
-    background: #6C757D;
-    max-width: 7em;
-    height: 2.3em;
-    border-radius: .3em;
-    color: #FFF;
-    margin-top: 1.3em;
-    font-size: 1em;
-
-    &:hover {
-        background: #5C636A;
-    }
-`;
+*/
