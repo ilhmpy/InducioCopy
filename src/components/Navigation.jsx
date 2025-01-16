@@ -51,6 +51,8 @@ export const Navigation = ({ children }) => {
 }
 
 const NavigationMenu = ({ absolute }) => {
+    const navigate = useNavigate();
+    
     return (
         <NavigationMenuContainer absolute={absolute}>
             <Container flex>
@@ -61,8 +63,8 @@ const NavigationMenu = ({ absolute }) => {
                     <NavigationMenuLink to="/karriere">Karriere</NavigationMenuLink>
                 </NavigationLinksContainer>
                 <NavigationLinksContainer gap=".5">
-                    <NavigationLinksButton>Anmelden</NavigationLinksButton>
-                    <NavigationLinksButton kntk>Kontaktieren Sie uns</NavigationLinksButton>
+                    <NavigationLinksButton onClick={() => navigate("/web/login")}>Anmelden</NavigationLinksButton>
+                    <NavigationLinksButton kntk onClick={() => navigate("/contactus")}>Kontaktieren Sie uns</NavigationLinksButton>
                 </NavigationLinksContainer>
             </Container>
         </NavigationMenuContainer>

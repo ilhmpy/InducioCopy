@@ -49,6 +49,7 @@ const PageDescH1 = styled.h1`
     font-weight: bold;
     letter-spacing: 0;
     line-height: 2em;
+    margin-top: -1em;
 `;
 
 const PageDescH3 = styled.h3`
