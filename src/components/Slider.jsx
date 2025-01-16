@@ -15,18 +15,58 @@ import stortrec from "../imgs/stortrec.png";
 import greenbone from "../imgs/greenbone.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 export const SliderSection = () => {
     const [slides, setSlides] = useState([
         { idx: 0, active: true },
         { idx: 1, active: false }
     ]);
-    const [activeSlide, setActiveSlide] = useState(0);
     const SliderRef = useRef(null);
     const WrapperRef = useRef(null);
 
     const handleRowClick = (row) => {
+
+        if (typeof row == "number") {
+            reloadPagination(row);
+            handleTranslation();
+        } else {
+            const activeSlide = slides.find((slide) => slide.active == true).idx;
+            
+            if (activeSlide == 0 && row == "right") {
+                reloadPagination(1);
+            } else if (activeSlide == 1 && row == "left") {
+                reloadPagination(0);
+            } else if (activeSlide == 0 && row == "left") {
+                reloadPagination(1);
+            } else if (activeSlide == 1 && row == "right") {
+                reloadPagination(0);
+            }
+
+            handleTranslation();
+        }
+    }
+
+    const reloadPagination = (row) => {
+        setSlides((slides) => {
+            let slidesArray = [];
+
+            slides.forEach((slide) => {
+
+                if (slide.idx == row) {
+                    slidesArray.push({ ...slide, active: true });
+                } else {
+                    slidesArray.push({ ...slide, active: false });
+                }
+
+                return slidesArray;
+            })
+
+            return slidesArray;
+        });
+    }
+
+    const handleTranslation = () => {
         const wrapper = WrapperRef.current;
         const transform = window.getComputedStyle(wrapper).transform;
         let transformNumber = null;
@@ -38,41 +78,15 @@ export const SliderSection = () => {
                   .map(Number)[4];
         }
 
-        if (typeof row == "number") {
-            setSlides((slides) => {
-                let slidesArray = [];
-    
-                slides.forEach((slide) => {
-
-                    if (slide.idx == row) {
-                        slidesArray.push({ ...slide, active: true });
-                    } else {
-                        slidesArray.push({ ...slide, active: false });
-                    }
-    
-                    return slidesArray;
-                })
-
-                return slidesArray;
-            });
+        if (typeof transformNumber == "number" && transformNumber < 0) {
+            wrapper.style.transform = `translateX(0px)`;
+            transformNumber = null;
+            return;
         } else {
-            if (row = "right") {
-                if (typeof transformNumber == "number" && transformNumber < 0) {
-                    wrapper.style.transform = `translateX(0px)`;
-                    transformNumber = null;
-                    return;
-                } else {
-                    wrapper.style.transform = `translateX(-${SliderRef.current.offsetWidth}px)`; 
-                }
-            } else if (row == "left") {
-                if (typeof transformNumber == "number" && transformNumber > 0) {
-                    wrapper.style.transform = `translateX(-${SliderRef.current.offsetWidth}px)`;
-                } else {
-                    wrapper.style.transform = `translateX(0px)`;
-                }
-            }
-        }
+            wrapper.style.transform = `translateX(-${SliderRef.current.offsetWidth}px)`; 
+        }  
     }
+    
 
     return (
         <SliderContainer>
@@ -135,7 +149,6 @@ const SliderWrapper = styled.div`
     height: inherit;
     display: inherit;
     transition: 1s;
-   // transform: translateX(-400px);
 `;
 
 const Img = styled.img`
@@ -148,7 +161,7 @@ const Img = styled.img`
 const SliderContainer = styled.section`
     background: #44494D;
     width: 100%;
-    height: auto;
+    height: 35em;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -180,7 +193,7 @@ const SliderDots = styled.div`
     flex-direction: row;
     gap: .3em;
     position: absolute;
-    bottom: 1.2em;
+    bottom: 3em;
 `;
 
 const SliderDot = styled.div`
@@ -210,7 +223,6 @@ const Slider = styled.div`
     width: 100%;
     max-width: 95%;
     position: relative;
-   // border: 1px solid red;
     display: flex;
     font-size: 10em;
     color: #FFF;
@@ -218,7 +230,7 @@ const Slider = styled.div`
     overflow: hidden;
     user-select: none;
     align-items: center;
-    margin-bottom: .5em;
+
     transition: transform 0.3s ease-in-out;
 `;
 
@@ -240,4 +252,6 @@ const SliderContainerH2 = styled.div`
     text-align: center;
     margin-top: 1em;
     margin-bottom: 1em;
+    position: absolute;
+    top: 1em;
 `;
