@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { InputInfo } from "../components/UI";
+import { InputInfo } from "../../components/UI";
 import { useState } from "react";
 
 export const Anmeldung = () => {
