@@ -27,19 +27,19 @@ export const SliderSection = () => {
 
     const handleRowClick = (row) => {
 
-        if (typeof row == "number") {
+        if (typeof row === "number") {
             reloadPagination(row);
             handleTranslation();
         } else {
-            const activeSlide = slides.find((slide) => slide.active == true).idx;
+            const activeSlide = slides.find((slide) => slide.active === true).idx;
             
-            if (activeSlide == 0 && row == "right") {
+            if (activeSlide === 0 && row === "right") {
                 reloadPagination(1);
-            } else if (activeSlide == 1 && row == "left") {
+            } else if (activeSlide === 1 && row === "left") {
                 reloadPagination(0);
-            } else if (activeSlide == 0 && row == "left") {
+            } else if (activeSlide === 0 && row === "left") {
                 reloadPagination(1);
-            } else if (activeSlide == 1 && row == "right") {
+            } else if (activeSlide === 1 && row === "right") {
                 reloadPagination(0);
             }
 
@@ -53,7 +53,7 @@ export const SliderSection = () => {
 
             slides.forEach((slide) => {
 
-                if (slide.idx == row) {
+                if (slide.idx === row) {
                     slidesArray.push({ ...slide, active: true });
                 } else {
                     slidesArray.push({ ...slide, active: false });
@@ -78,7 +78,7 @@ export const SliderSection = () => {
                   .map(Number)[4];
         }
 
-        if (typeof transformNumber == "number" && transformNumber < 0) {
+        if (typeof transformNumber === "number" && transformNumber < 0) {
             wrapper.style.transform = `translateX(0px)`;
             transformNumber = null;
             return;
@@ -94,7 +94,7 @@ export const SliderSection = () => {
             <Slider>
                 <SliderWrapper ref={WrapperRef}>
                     {slides.map((slide) => {
-                        if (slide.idx == 0) {
+                        if (slide.idx === 0) {
                             return (
                                 <SliderSlide ref={SliderRef} key={slide.idx}>
                                     <Img id="ext" style={{ width: "184px", height: "54px" }} src={extocode} />

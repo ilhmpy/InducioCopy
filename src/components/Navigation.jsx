@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import { Container } from "./Container";
 import logo from "../imgs/Inducio.webp";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -13,12 +13,11 @@ const PAGES = [
 ]
 
 const changeTitle = (to) => {
-    document.title = `${PAGES.find((page) => page.to == to)?.page} | Inducio`;
+    document.title = `${PAGES.find((page) => page.to === to)?.page} | Inducio`;
 }
 
 export const Navigation = ({ children }) => {
     const [scrollY, setScrollY] = useState(0);
-    const [pathName, setPathName] = useState("");
     
     const standartStyled = {
         top: "-100vh",
@@ -100,7 +99,7 @@ const NavigationMenuLink = ({ children, to }) => {
     }
 
     return (
-        <ComponentLink onClick={onClick} active={location.pathname == to}>
+        <ComponentLink onClick={onClick} active={location.pathname === to}>
             {children}
         </ComponentLink>
     )

@@ -10,15 +10,15 @@ export const Footer = () => {
                 <Container>
                     <FooterFlex>
                         <FooterLinks>
-                            <a>Impressum</a>
-                            <a>Datenschutz</a>
-                            <a>AGB's</a>
+                            <a href="#">Impressum</a>
+                            <a href="#">Datenschutz</a>
+                            <a href="#">AGB's</a>
                         </FooterLinks>
                         <FooterAdresse>
                             Kotzinger Str. 21 | 83278 Traunstein | DE
                             <FooterNummer>
-                                <a><FontAwesomeIcon icon={faPhone} color={"#FFF"} />​ +49 861 90119070</a> 
-                                <a><FontAwesomeIcon icon={faEnvelope} color={"#FFF"} /> ​info@inducio.de</a>
+                                <a href="#"><FontAwesomeIcon icon={faPhone} color={"#FFF"} />​ +49 861 90119070</a> 
+                                <a href="#"><FontAwesomeIcon icon={faEnvelope} color={"#FFF"} /> ​info@inducio.de</a>
                             </FooterNummer>
                         </FooterAdresse>
                     </FooterFlex>
@@ -68,6 +68,7 @@ const FooterLinks = styled.div`
 
     & > a {
         color: #AFB5BA;
+        text-decoration: none;
         line-height: 1.5em;
     }
 

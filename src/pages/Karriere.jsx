@@ -29,7 +29,7 @@ export const Karriere = () => {
             let newLinks = [];
             
             links.forEach((newLink) => {
-                if (newLink.ancher == ancher) {
+                if (newLink.ancher === ancher) {
                     newLink.active = true;
                 } else {
                     newLink.active = false;
@@ -76,7 +76,7 @@ export const Karriere = () => {
         links.forEach((link) => observer.observe(link.ref.current));
 
         return () => observer.disconnect();
-    }, [])
+    }, [links])
 
     useEffect(() => {
         const handleScroll = () => {
