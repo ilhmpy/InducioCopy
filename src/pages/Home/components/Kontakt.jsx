@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { Container } from "../../../components/Container";
-import { InputInfo, InfoButton } from "../../../components/UI";
+import { Form } from "../../../components";
 
 export const Kontakt = () => {
     return (
@@ -14,20 +14,7 @@ export const Kontakt = () => {
                         für Ihre individuelle Beratung!
                     </KontaktH3>
                 </KontaktDesc>
-                <div>
-                    <InputInfo desc={"Ihre Name"} />
-                    <InputInfo desc={"Telefon"} />
-                    <InputInfo desc={"Ihre E-Mail"} />
-                    <InputInfo desc={"Ihr Unternehmen"} />
-                    <InputInfo desc={"Betreff *"} />
-                    <InputInfo desc={"Ihre Anfrage"} area />
-                    <InputInfo>
-                        <span></span>
-                        <InfoButton>
-                            Absenden
-                        </InfoButton>
-                    </InputInfo>
-                </div>
+                <Form />
             </Container>
         </KontaktContainer>
     )

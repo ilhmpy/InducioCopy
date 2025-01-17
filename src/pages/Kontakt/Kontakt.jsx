@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { Container } from "../components/Container";
-import AdobeStock from "../imgs/AdobeStock.webp";
-import { InputInfo, InfoButton } from "../components/UI";
+import { Container } from "../../components/Container";
+import AdobeStock from "../../imgs/AdobeStock.webp";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot, faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { Form } from "../../components";
 
 export const Kontakt = () => {
     return (
@@ -20,17 +20,7 @@ export const Kontakt = () => {
                             Kontaktieren Sie uns bezüglich unserer Firma und unseren Dienstleistungen. <br />
                             Wir tun alles, um uns so schnell wie möglich mit Ihnen in Verbindung zu setzen.
                         </KontaktFormDesc>
-                        <InputInfo dark desc={"Name"} />
-                        <InputInfo dark desc={"Telefon"} />
-                        <InputInfo dark desc={"E-Mail"} />
-                        <InputInfo dark desc={"Unternehmen"} />
-                        <InputInfo dark desc={"Betreff *"} />
-                        <InputInfo dark desc={"Frage"} area />
-                        <InputInfo>
-                            <InfoButton>
-                                Absenden
-                            </InfoButton>
-                        </InputInfo>
+                        <Form dark />
                     </KontaktFormContainer>
                     <KontaktFormInfo>
                         <FormInfoDesc>Mein Unternehmen</FormInfoDesc>
