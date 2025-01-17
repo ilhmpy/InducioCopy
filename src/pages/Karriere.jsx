@@ -3,6 +3,10 @@ import karriere from "../imgs/Karriere.png"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGamepad, faPeopleGroup, faHeart, faMoneyBill } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useRef, useState } from "react";
+import { Container } from "../components/Container";
+import { InputInfo, InfoButton } from "../components/UI";
+
+import flexible from "../imgs/flexible.webp";
 
 export const Karriere = () => {
     const menuRef = useRef();
@@ -98,38 +102,42 @@ export const Karriere = () => {
                 <Img src={karriere} />
             </ImgContainer>
             <InfoContainer>
-                <DescContainer>
-                    <InfoH2>inducio als Arbeitgeber</InfoH2>
-                    <p>
-                        Wir entwickeln innovative und maßgeschneiderte IT-Lösungen für unsere Kunden – 
-                        wir finden für jeden Kunden die passende Lösung.
-                    </p>
+                <Container flex>
+                    <DescContainer>
+                        <InfoH2>inducio als Arbeitgeber</InfoH2>
+                        <p>
+                            Wir entwickeln innovative und maßgeschneiderte IT-Lösungen für unsere Kunden – 
+                            wir finden für jeden Kunden die passende Lösung.
+                        </p>
 
-                    <p>
-                        Herzstück unseres Erfolges sind dabei unsere Mitarbeiter! Daher sind wir immer auf 
-                        der Suche nach motivierten Mitgliedern für unser junges und dynamisches Team, 
-                        die ihre berufliche Zukunft aktiv mitgestalten möchten und zusammen mit uns wachsen wollen!
-                    </p>
+                        <p>
+                            Herzstück unseres Erfolges sind dabei unsere Mitarbeiter! Daher sind wir immer auf 
+                            der Suche nach motivierten Mitgliedern für unser junges und dynamisches Team, 
+                            die ihre berufliche Zukunft aktiv mitgestalten möchten und zusammen mit uns wachsen wollen!
+                        </p>
 
-                    <p>
-                        Unser Büro befindet sich am nördlichen Rande Traunsteins und bietet eine komfortable und 
-                        moderne Büroausstattung. Bei uns herrschen flache Hierarchien und ein wertschätzender, 
-                        familiärer Umgang innerhalb des gesamten Teams. Wir haben Spaß an dem was wir tun und 
-                        das wirkt sich auch auf die Büroatmosphäre positiv aus.
-                    </p>
+                        <p>
+                            Unser Büro befindet sich am nördlichen Rande Traunsteins und bietet eine komfortable und 
+                            moderne Büroausstattung. Bei uns herrschen flache Hierarchien und ein wertschätzender, 
+                            familiärer Umgang innerhalb des gesamten Teams. Wir haben Spaß an dem was wir tun und 
+                            das wirkt sich auch auf die Büroatmosphäre positiv aus.
+                        </p>
 
-                    <InfoH2 mb>Herzenssache: Ausbildung bei inducio</InfoH2>
-                    Besonders am Herzen liegt uns der Fachkräfte-Nachwuchs. Daher bilden wir im 
-                    technischen Bereich selbst aus. Unsere Auszubildenden dürfen in spannenden Projekten 
-                    mitarbeiten und können von dem umfangreichen Fachwissen ihrer Kollegen profitieren. 
-                    Darüber hinaus ermutigen unsere Ausbilder zum selbstständigen und eigenverantwortlichen 
-                    Arbeiten und stehen bei allen Fragen und Problemen mit Rat und Tat zur Seite.
-                </DescContainer>
+                        <InfoH2 mb>Herzenssache: Ausbildung bei inducio</InfoH2>
+                        Besonders am Herzen liegt uns der Fachkräfte-Nachwuchs. Daher bilden wir im 
+                        technischen Bereich selbst aus. Unsere Auszubildenden dürfen in spannenden Projekten 
+                        mitarbeiten und können von dem umfangreichen Fachwissen ihrer Kollegen profitieren. 
+                        Darüber hinaus ermutigen unsere Ausbilder zum selbstständigen und eigenverantwortlichen 
+                        Arbeiten und stehen bei allen Fragen und Problemen mit Rat und Tat zur Seite.
+                    </DescContainer>
+                </Container>
             </InfoContainer>
             <WarumContainer>
-                <WarumTitle>
-                    Warum Inducio ?
-                </WarumTitle>
+                <Container flex>
+                    <WarumTitle>
+                        Warum Inducio ?
+                    </WarumTitle>
+                </Container>
             </WarumContainer>
             <AntwortContainer>
                 <AntwortInnContainer>
@@ -157,61 +165,81 @@ export const Karriere = () => {
                 <AntwortEndH3>Alle Funktionen entdecken</AntwortEndH3>
             </AntwortContainer>
             <KarriereMenu>
-                <MenuLinks ref={menuRef}>
-                    <div style={{ paddingTop: menuPosition ? `${menuPosition}em` : "" }}>
-                        {links.map((link) => (
-                            <KarriereLink 
-                                href={link.ancher} active={link.active} 
-                                onClick={e => onLink(e, link)}
-                            >
-                                {link.title}
-                            </KarriereLink>
-                        ))}
+            <MenuLinks ref={menuRef}>
+                        <div style={{ paddingTop: menuPosition ? `${menuPosition}em` : "" }}>
+                            {links.map((link) => (
+                                <KarriereLink 
+                                    href={link.ancher} active={link.active} 
+                                    onClick={e => onLink(e, link)}
+                                >
+                                    {link.title}
+                                </KarriereLink>
+                            ))}
+                        </div>
+                    </MenuLinks>
+                    <div>
+                        <MenuBlock id="OS" ref={menuBlockRef}>
+                            <MenuH2>Offene Stellen</MenuH2>
+                            <MenuDesc>wir suchen ab sofort:</MenuDesc>
+                            <MenuPosition>Systemadministrator (m/w/d) für Infrastrukturen</MenuPosition>
+                        </MenuBlock>
+
+                        <MenuBlock id="AUS" ref={ausRef}>
+                            <MenuH2>Ausbildung</MenuH2>
+                            <MenuDesc>wir bilden aus:</MenuDesc>
+                            <MenuPosition>Fachinformatiker(m/w/d) für Systemintegration</MenuPosition>
+                            <MenuPosition>Fachinformatiker (m/w/d) Anwendungsentwicklung</MenuPosition>
+                            <MenuPosition>Fachinformatiker (m/w/d) Fachrichtung Digitale Vernetzung</MenuPosition>
+                        </MenuBlock>
+
+                        <MenuBlock id="INI" ref={iniRef}>
+                            <MenuH2>Initiativbewerbung</MenuH2>
+                            <MenuDesc big>keine passende Stelle gefunden ?</MenuDesc>
+                            <MenuP>
+                                Auch wenn derzeit keine für Ihre Qualifikation in Frage kommende Position ausgeschrieben 
+                                ist, würden wir uns über Ihre Initiativbewerbung freuen.
+                            </MenuP>
+
+                            <MenuP>
+                                Bitte teilen Sie uns bei einer Initiativbewerbung auch mit, in welchem Bereich 
+                                Sie tätig sein möchten....
+                            </MenuP>
+
+                            <MenuP>
+                                Wir freuen uns auf Ihre Unterlagen!
+                            </MenuP>
+
+                            <MenuP>
+                                als PDF an bewerbung@inducio.de oder per Post an inducio GmbH |
+                                Initiativbewerbung | Kotzinger Str. 21 | 83278 Traunstein
+                            </MenuP>
+                        </MenuBlock>
+                        <MenuBlock id="BE" ref={beRef}>
+                            <MenuH2>Benefits</MenuH2>
+                        </MenuBlock>
                     </div>
-                </MenuLinks>
-                <div>
-                    <MenuBlock id="OS" ref={menuBlockRef}>
-                        <MenuH2>Offene Stellen</MenuH2>
-                        <MenuDesc>wir suchen ab sofort:</MenuDesc>
-                        <MenuPosition>Systemadministrator (m/w/d) für Infrastrukturen</MenuPosition>
-                    </MenuBlock>
-
-                    <MenuBlock id="AUS" ref={ausRef}>
-                        <MenuH2>Ausbildung</MenuH2>
-                        <MenuDesc>wir bilden aus:</MenuDesc>
-                        <MenuPosition>Fachinformatiker(m/w/d) für Systemintegration</MenuPosition>
-                        <MenuPosition>Fachinformatiker (m/w/d) Anwendungsentwicklung</MenuPosition>
-                        <MenuPosition>Fachinformatiker (m/w/d) Fachrichtung Digitale Vernetzung</MenuPosition>
-                    </MenuBlock>
-
-                    <MenuBlock id="INI" ref={iniRef}>
-                        <MenuH2>Initiativbewerbung</MenuH2>
-                        <MenuDesc big>keine passende Stelle gefunden ?</MenuDesc>
-                        <MenuP>
-                            Auch wenn derzeit keine für Ihre Qualifikation in Frage kommende Position ausgeschrieben 
-                            ist, würden wir uns über Ihre Initiativbewerbung freuen.
-                        </MenuP>
-
-                        <MenuP>
-                            Bitte teilen Sie uns bei einer Initiativbewerbung auch mit, in welchem Bereich 
-                            Sie tätig sein möchten....
-                        </MenuP>
-
-                        <MenuP>
-                            Wir freuen uns auf Ihre Unterlagen!
-                        </MenuP>
-
-                        <MenuP>
-                            als PDF an bewerbung@inducio.de oder per Post an inducio GmbH |
-                            Initiativbewerbung | Kotzinger Str. 21 | 83278 Traunstein
-                        </MenuP>
-                    </MenuBlock>
-
-                    <MenuBlock id="BE" ref={beRef}>
-                        <MenuH2>Benefits</MenuH2>
-                    </MenuBlock>
-                </div>
             </KarriereMenu>
+            <MenuBenefits>
+                <Container flex>
+                    <ImgBenefit src={flexible} />
+                </Container>
+            </MenuBenefits>
+            <Kontakt>
+                <Container>
+                    <InputInfo dark desc={"Ihre Name"} />
+                    <InputInfo dark desc={"Telefon"} />
+                    <InputInfo dark desc={"Ihre E-Mail"} />
+                    <InputInfo dark desc={"Ihr Unternehmen"} />
+                    <InputInfo dark desc={"Betreff *"} />
+                    <InputInfo dark desc={"Ihre Anfrage"} area />
+                    <InputInfo alone>
+                        <InfoButton>
+                            Absenden
+                        </InfoButton>
+                        <span></span>
+                    </InputInfo>
+                </Container>
+            </Kontakt>
         </KarriereContainer>
     )
 }
@@ -352,16 +380,17 @@ const KarriereMenu = styled.div`
     display: grid;
     grid-template-columns: 25% 75%;
     padding-left: 1em;
+    justify-content: center;
     transition: 1s;
     padding-top: 2em;
 `;
 
 const MenuLinks = styled.div`
     display: grid;
-    height: inherit;
+    height: 50em;
     position: relative;
     transition: 1s;
-    z-index: 5;
+    z-index: 99;
 
     & > div {
         transition: .3s;
@@ -425,9 +454,24 @@ const MenuPosition = styled.h3`
 `;
 
 const MenuBlock = styled.div`
-    margin-bottom: 5em;
+    margin-bottom: 6em;
+
+    &:last-child {
+        margin-bottom: 3em; 
+    }
 `;
 
 const MenuP = styled.p`
 
 `;
+
+const MenuBenefits = styled.div`
+    margin-bottom: 2em;
+`
+
+const ImgBenefit = styled.img`
+    width: 75em;
+    height: 30em;
+`
+
+const Kontakt = styled.div``

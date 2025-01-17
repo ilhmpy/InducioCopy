@@ -26,7 +26,7 @@ export const Footer = () => {
             </FooterMain>
             <FooterUnder>
                 <Container>
-                    <span>Copyright © inducio GmbH</span>
+                    <span>NOT A ORIGINAL inducio GmbH</span>
                 </Container>
             </FooterUnder>
         </FooterContainer>
