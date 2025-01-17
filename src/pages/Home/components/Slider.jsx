@@ -1,4 +1,13 @@
 import { styled } from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { useRef, useState } from "react";
+import SwiperCore from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
+
+import 'swiper/css';
+import 'swiper/css/navigation';
 
 import extocode from "../../../imgs/extocode.png";
 import Secure2Fibe from "../../../imgs/Secure2Fibe.png";
@@ -13,9 +22,8 @@ import quantum from "../../../imgs/quantum.png";
 import iusard from "../../../imgs/iusard.png";
 import stortrec from "../../../imgs/stortrec.png";
 import greenbone from "../../../imgs/greenbone.png";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { useRef, useState } from "react";
+
+SwiperCore.use([ Navigation, Pagination ]);
 
 export const SliderSection = () => {
     const [slides, setSlides] = useState([
@@ -91,6 +99,7 @@ export const SliderSection = () => {
     return (
         <SliderContainer>
             <SliderContainerH2>Unsere Partner</SliderContainerH2>
+            {/*
             <Slider>
                 <SliderWrapper ref={WrapperRef}>
                     {slides.map((slide) => {
@@ -126,7 +135,44 @@ export const SliderSection = () => {
             <SliderRow id="right" style={{ right: "1em" }} onClick={() => handleRowClick("right")}>
                 <FontAwesomeIcon icon={faArrowRight} />
             </SliderRow>
-            <SliderDotsComponent slides={slides} onHandle={handleRowClick} />
+            <SliderDotsComponent slides={slides} onHandle={handleRowClick} /> */}
+            <Swiper
+                loop={true}
+                navigation={{
+                    nextEl: '.swiper-cstm-button-next',
+                    prevEl: '.swiper-cstm-button-prev',
+                }}
+                pagination={{
+                    el: '.swiper-pagination',
+                    clickable: true,
+                }}
+                slidesPerView={1}
+                spaceBetween={30}
+                slideClass="SliderSlideClass"
+            >
+                <SliderSlide className="SliderSlideClass">
+                    <Img id="ext" style={{ width: "184px", height: "54px" }} src={extocode} />
+                    <Img id="sec" style={{ width: "189px", height: "51px" }} src={Secure2Fibe} />
+                    <Img id="an" style={{ width: "189px", height: "72px" }} src={anschlusswerk} />
+                    <Img id="allied" style={{ width: "189px", height: "18px" }} src={WhiteAllied} />
+                    <Img id="ripe" style={{ width: "189px", height: "33px" }} src={RipeNCC} />
+                    <Img id="nak" style={{ width: "154px", height: "24px" }} src={nakivo} />
+                </SliderSlide>
+                <SliderSlide className="SliderSlideClass">
+                    <Img id="nord" style={{ width: "189px", height: "60px" }} src={nordane} />
+                    <Img id="mg" style={{ width: "189px", height: "53px" }} src={mgfuture} />
+                    <Img id="qua" style={{ width: "189px", height: "37px" }} src={quantum} />
+                    <Img id="iu" style={{ width: "189px", height: "102px" }} src={iusard} />
+                    <Img id="st" style={{ width: "189px", height: "62px" }} src={stortrec} />
+                    <Img id="gr" style={{ width: "189px", height: "96px" }} src={greenbone} />
+                </SliderSlide>
+                <SliderRow style={{ left: "1em" }} className="swiper-cstm-button-prev">
+                    <FontAwesomeIcon icon={faArrowLeft} />
+                </SliderRow>
+                <SliderRow style={{ right: "1em" }} className="swiper-cstm-button-next">
+                    <FontAwesomeIcon icon={faArrowRight} />
+                </SliderRow>
+            </Swiper>
         </SliderContainer>
     )
 }
@@ -143,13 +189,6 @@ const SliderDotsComponent = ({ slides, onHandle }) => {
         </SliderDots>
     )
 }
-
-const SliderWrapper = styled.div`
-    width: inherit;
-    height: inherit;
-    display: inherit;
-    transition: 1s;
-`;
 
 const Img = styled.img`
     display: block;

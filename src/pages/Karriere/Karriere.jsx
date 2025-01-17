@@ -27,5 +27,3 @@ const KarriereContainer = styled.section`
     transition: 1s;
     padding-top: 3em;
 `;
-
-const Kontakt = styled.div``
