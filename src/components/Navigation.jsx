@@ -11,6 +11,9 @@ const PAGES = [
     { to: "/karriere", page: "Karriere" },
     { to: "/web/login", page: "Login" }
 ]
+const standartStyled = {
+    top: "-100vh",
+}
 
 const changeTitle = (to) => {
     document.title = `${PAGES.find((page) => page.to === to)?.page} | Inducio`;
@@ -18,10 +21,6 @@ const changeTitle = (to) => {
 
 export const Navigation = ({ children }) => {
     const [scrollY, setScrollY] = useState(0);
-    
-    const standartStyled = {
-        top: "-100vh",
-    }
     
     const [absoluteStyled, setAbsoluteStyled] = useState(standartStyled);
 
@@ -54,7 +53,7 @@ export const Navigation = ({ children }) => {
         const pathName = window.location.pathname;
         changeTitle(pathName);
 
-    }, [window.location.pathname]);
+    }, []);
 
     return (
         <NavigationContainer>
@@ -146,9 +145,10 @@ const NavigationLinksContainer = styled.div`
     gap: ${({ gap }) => gap ? `${gap}em` : "1em"};
 `;
 
-const ComponentLink = styled.a`
+const ComponentLink = styled.span`
     font-size: 1em;
     color: #0000008C;
+    cursor: pointer;
     font-weight: 300;
 
     &:hover {

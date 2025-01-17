@@ -71,7 +71,7 @@ export const SliderSection = () => {
         const transform = window.getComputedStyle(wrapper).transform;
         let transformNumber = null;
 
-        if (transform != "none") {
+        if (transform !== "none") {
             transformNumber = transform
                   .match(/matrix\(([^)]+)\)/)[1]
                   .split(',')
