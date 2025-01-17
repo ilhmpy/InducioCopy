@@ -1,18 +1,18 @@
 import { styled } from "styled-components";
 
-import extocode from "../imgs/extocode.png";
-import Secure2Fibe from "../imgs/Secure2Fibe.png";
-import anschlusswerk from "../imgs/anschlusswerk.webp";
-import WhiteAllied from "../imgs/WhiteAllied.webp";
-import RipeNCC from "../imgs/RipeNCC.png";
-import nakivo from "../imgs/nakivo.svg";
+import extocode from "../../../imgs/extocode.png";
+import Secure2Fibe from "../../../imgs/Secure2Fibe.png";
+import anschlusswerk from "../../../imgs/anschlusswerk.webp";
+import WhiteAllied from "../../../imgs/WhiteAllied.webp";
+import RipeNCC from "../../../imgs/RipeNCC.png";
+import nakivo from "../../../imgs/nakivo.svg";
 
-import nordane from "../imgs/nordane.png";
-import mgfuture from "../imgs/mgfuture.png";
-import quantum from "../imgs/quantum.png";
-import iusard from "../imgs/iusard.png";
-import stortrec from "../imgs/stortrec.png";
-import greenbone from "../imgs/greenbone.png";
+import nordane from "../../../imgs/nordane.png";
+import mgfuture from "../../../imgs/mgfuture.png";
+import quantum from "../../../imgs/quantum.png";
+import iusard from "../../../imgs/iusard.png";
+import stortrec from "../../../imgs/stortrec.png";
+import greenbone from "../../../imgs/greenbone.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { useRef, useState } from "react";

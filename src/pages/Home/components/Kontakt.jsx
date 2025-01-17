@@ -1,6 +1,6 @@
 import styled from "styled-components"
-import { Container } from "./Container";
-import { InputInfo, InfoButton } from "./UI";
+import { Container } from "../../../components/Container";
+import { InputInfo, InfoButton } from "../../../components/UI";
 
 export const Kontakt = () => {
     return (

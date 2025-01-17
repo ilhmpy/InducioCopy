@@ -98,6 +98,7 @@ const FooterNummer = styled.div`
     }
 
     & > a {
+        text-decoration: none;
         color: #AFB5BA;
         line-height: 1.5em;
         display: block;
