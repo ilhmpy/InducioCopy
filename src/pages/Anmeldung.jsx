@@ -26,7 +26,7 @@ export const Anmeldung = () => {
             <AnmeldungContainer>
                 <AnmeldungForm>
                     <InputDesc>Ihre E-Mail</InputDesc>
-                    <InputInfo style={{ "margin-bottom": "1em" }} dark alone />
+                    <InputInfo dark alone />
                     <AnmeldungButton>Passwort zurücksetzen</AnmeldungButton>
                     <InputDesc pswzs onClick={handleWindowStand}>Zurück zur Anmeldung</InputDesc>
                 </AnmeldungForm>

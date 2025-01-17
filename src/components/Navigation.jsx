@@ -5,9 +5,20 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Footer } from "./Footer";
 
+const PAGES = [
+    { to: "/", page: "Home" },
+    { to: "/contactus", page: "Kontakt" },
+    { to: "/karriere", page: "Karriere" },
+    { to: "/web/login", page: "Login" }
+]
+
+const changeTitle = (to) => {
+    document.title = `${PAGES.find((page) => page.to == to)?.page} | Inducio`;
+}
 
 export const Navigation = ({ children }) => {
     const [scrollY, setScrollY] = useState(0);
+    const [pathName, setPathName] = useState("");
     
     const standartStyled = {
         top: "-100vh",
@@ -16,27 +27,35 @@ export const Navigation = ({ children }) => {
     const [absoluteStyled, setAbsoluteStyled] = useState(standartStyled);
 
     useEffect(() => {
-        const handleScroll = () => {
-          setScrollY(window.scrollY);
-
-          if (window.scrollY > 350) {
-            setAbsoluteStyled({
-                top: '0'
-            })
-          } else {
-            setAbsoluteStyled({
-                ...standartStyled,
-                transition: 0
-            })
-          }
-        };
-    
-        window.addEventListener('scroll', handleScroll);
-    
-        return () => {
-          window.removeEventListener('scroll', handleScroll);
-        };
+        if (window.location.pathname !== "/karriere") {
+            const handleScroll = () => {
+                setScrollY(window.scrollY);
+      
+                if (window.scrollY > 350) {
+                  setAbsoluteStyled({
+                      top: '0'
+                  })
+                } else {
+                  setAbsoluteStyled({
+                      ...standartStyled,
+                      transition: 0
+                  })
+                }
+              };
+          
+              window.addEventListener('scroll', handleScroll);
+          
+              return () => {
+                window.removeEventListener('scroll', handleScroll);
+              };
+        }
     }, [scrollY]);
+
+    useEffect(() => {
+        const pathName = window.location.pathname;
+        changeTitle(pathName);
+
+    }, [window.location.pathname]);
 
     return (
         <NavigationContainer>
@@ -57,7 +76,7 @@ const NavigationMenu = ({ absolute }) => {
         <NavigationMenuContainer absolute={absolute}>
             <Container flex>
                 <NavigationLinksContainer>
-                    <Logo src={logo} />
+                    <Logo src={logo} onClick={() => navigate("/")} />
                     <NavigationMenuLink to="/">Home</NavigationMenuLink>
                     <NavigationMenuLink to="/contactus">Kontakt</NavigationMenuLink>
                     <NavigationMenuLink to="/karriere">Karriere</NavigationMenuLink>
@@ -75,8 +94,13 @@ const NavigationMenuLink = ({ children, to }) => {
     const location = useLocation();
     const navigate = useNavigate();
 
+    const onClick = () => {
+        changeTitle(to);
+        navigate(to);
+    }
+
     return (
-        <ComponentLink onClick={() => navigate(to)} active={location.pathname == to}>
+        <ComponentLink onClick={onClick} active={location.pathname == to}>
             {children}
         </ComponentLink>
     )
@@ -102,7 +126,7 @@ const NavigationMenuContainer = styled.div`
         if (absolute) {
             return `
                 position: fixed;
-                z-index: 99999;
+                z-index: 9;
                 top: ${absolute.top};
 
             `
@@ -114,6 +138,7 @@ const Logo = styled.img`
     width: 130px;
     height: 40px;
     margin-right: 1.3em;
+    cursor: pointer;
 `;
 
 const NavigationLinksContainer = styled.div`
