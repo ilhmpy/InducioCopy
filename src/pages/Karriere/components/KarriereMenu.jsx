@@ -157,7 +157,7 @@ export const KarriereMenu = () => {
                 </div>
             </KarriereMenuContainer>
             <MenuBenefits>
-                <Container flex>
+                <Container>
                     <ImgBenefit src={benefits} />
                 </Container>
             </MenuBenefits>
@@ -258,6 +258,6 @@ const MenuBenefits = styled.div`
 `
 
 const ImgBenefit = styled.img`
-    width: 75em;
+    width: 74em;
     height: 30em;
 `

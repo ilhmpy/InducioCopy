@@ -3,19 +3,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useRef, useState } from "react";
 
-import extocode from "../../../imgs/extocode.png";
-import Secure2Fibe from "../../../imgs/Secure2Fibe.png";
+import extocode from "../../../imgs/extocode.svg";
+import Secure2Fibe from "../../../imgs/Secure2Fibe.svg";
 import anschlusswerk from "../../../imgs/anschlusswerk.webp";
 import WhiteAllied from "../../../imgs/WhiteAllied.webp";
-import RipeNCC from "../../../imgs/RipeNCC.png";
+import RipeNCC from "../../../imgs/RipeNCC.svg";
 import nakivo from "../../../imgs/nakivo.svg";
 
-import nordane from "../../../imgs/nordane.png";
-import mgfuture from "../../../imgs/mgfuture.png";
-import quantum from "../../../imgs/quantum.png";
-import iusard from "../../../imgs/iusard.png";
-import stortrec from "../../../imgs/stortrec.png";
-import greenbone from "../../../imgs/greenbone.png";
+import nordane from "../../../imgs/nordane.svg";
+import mgfuture from "../../../imgs/mgfuture.svg";
+import quantum from "../../../imgs/quantum.svg";
+import iusard from "../../../imgs/iusard.svg";
+import stortrec from "../../../imgs/stortrec.svg";
+import greenbone from "../../../imgs/greenbone.svg";
 
 export const SliderSection = () => {
     const [slides, setSlides] = useState([
@@ -63,21 +63,26 @@ export const SliderSection = () => {
         setIsAnimating(true);
 
         setCurrentIndex((prevIndex) => {
-            let newIndex = { current: 0, real: 0 }
+            let newIndex = { ...prevIndex }
 
-            if (prevIndex.real === slides.length - 1) {
-                newIndex.real = slides[0].idx;
+            if (typeof direction != "number") {
+                if (prevIndex.real === slides.length - 1) {
+                    newIndex.real = slides[0].idx;
+                } else {
+                   newIndex.real = slides[slides.length - 1].idx;
+                }
+    
+                if (direction === "right") {
+                    newIndex.current = prevIndex.current + 1;
+                } else {
+                    newIndex.current = prevIndex.current - 1;
+                }
             } else {
-               newIndex.real = slides[slides.length - 1].idx;
+                newIndex.real = direction;
+                newIndex.current = direction + 1;
             }
 
             actualActiveSlide(newIndex.real);
-
-            if (direction === "right") {
-                newIndex.current = prevIndex.current + 1;
-            } else {
-                newIndex.current = prevIndex.current - 1;
-            }
 
             return newIndex;
         });
@@ -130,21 +135,21 @@ export const SliderSection = () => {
                 >
                     <SliderSlide>
                         {slides[slides.length - 1].logos.map((item) => (
-                            <Img src={item.src} imgstyle={item.style} />
+                            <Img loading={"lazy"} src={item.src} imgstyle={item.style} />
                         ))}
                     </SliderSlide>
 
                     {slides.map((slide) => (
                         <SliderSlide ref={SlideRef} key={slide.idx}>
                             {slide.logos.map((item) => (
-                                <Img src={item.src} imgstyle={item.style} />
+                                <Img loading={"lazy"} src={item.src} imgstyle={item.style} />
                             ))}
                         </SliderSlide>
                     ))}
 
                     <SliderSlide>
                         {slides[0].logos.map((item) => (
-                            <Img src={item.src} imgstyle={item.style} />
+                            <Img loading={"lazy"} src={item.src} imgstyle={item.style} />
                         ))}
                     </SliderSlide>
                 </SliderWrapper>
