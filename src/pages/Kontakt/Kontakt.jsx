@@ -36,7 +36,8 @@ export const Kontakt = () => {
 
 const KontaktContainer = styled.section`
     width: 100%;
-    height: auto;
+    height: 100vh;
+    overflow: hidden;
 `;
 
 const KontaktDesc = styled.div`
@@ -63,7 +64,7 @@ const KontaktH1 = styled.h1`
 const KontaktForm = styled.div`
     width: 100%;
     background: #FFFF;
-    height: auto;  
+    height: 100vh;  
 
     & > div {
         display: grid;
