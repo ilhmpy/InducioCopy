@@ -3,6 +3,11 @@ import { Anmeldung, Home, Karriere, Kontakt } from "./pages";
 import React from "react";
 import { Navigation } from "./components";
 
+// исправить растянутость картинки на странице Karriere
+// приклеить футер
+//  пагинация
+// оптимизировать слайдер
+// сделать анимацию типа их статистика в цифрах с нуля стает заранее заготовленным числом
 
 const App = () => {
   const routing = useRoutes([

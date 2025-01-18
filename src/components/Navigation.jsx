@@ -23,42 +23,44 @@ export const Navigation = ({ children }) => {
     const [scrollY, setScrollY] = useState(0);
     
     const [absoluteStyled, setAbsoluteStyled] = useState(standartStyled);
+    const [pathName, setPathName] = useState("");
 
     useEffect(() => {
-        if (window.location.pathname !== "/karriere") {
-            const handleScroll = () => {
-                setScrollY(window.scrollY);
+        setPathName(window.location.pathname)
+    }, [pathName]); 
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrollY(window.scrollY);
+  
+            if (window.scrollY > 350) {
+              setAbsoluteStyled({
+                  top: '0'
+              })
+            } else {
+              setAbsoluteStyled({
+                  ...standartStyled,
+                  transition: 0
+              })
+            }
+          };
       
-                if (window.scrollY > 350) {
-                  setAbsoluteStyled({
-                      top: '0'
-                  })
-                } else {
-                  setAbsoluteStyled({
-                      ...standartStyled,
-                      transition: 0
-                  })
-                }
-              };
-          
-              window.addEventListener('scroll', handleScroll);
-          
-              return () => {
-                window.removeEventListener('scroll', handleScroll);
-              };
-        }
-    }, [scrollY]);
+          window.addEventListener('scroll', handleScroll);
+      
+          return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [scrollY, pathName]);
 
     useEffect(() => {
         const pathName = window.location.pathname;
         changeTitle(pathName);
-
     }, []);
 
     return (
         <NavigationContainer>
             <NavigationMenu />
-            <NavigationMenu absolute={absoluteStyled} />
+            {window.location.pathname === "/karriere" ? <></> : <NavigationMenu absolute={absoluteStyled} />}
             <Flex1Container>
                 {children}
             </Flex1Container>

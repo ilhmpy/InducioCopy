@@ -8,6 +8,7 @@ export const InfoButton = styled.button`
     color: #FFF;
     margin-top: 1.3em;
     font-size: 1em;
+    margin-bottom: 1.3em;
 
     &:hover {
         background: #5C636A;

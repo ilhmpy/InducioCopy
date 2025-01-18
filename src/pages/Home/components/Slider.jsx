@@ -1,13 +1,7 @@
 import { styled } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { useRef, useState } from "react";
-import SwiperCore from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
-
-import 'swiper/css';
-import 'swiper/css/navigation';
+import { useEffect, useRef, useState } from "react";
 
 import extocode from "../../../imgs/extocode.png";
 import Secure2Fibe from "../../../imgs/Secure2Fibe.png";
@@ -23,110 +17,136 @@ import iusard from "../../../imgs/iusard.png";
 import stortrec from "../../../imgs/stortrec.png";
 import greenbone from "../../../imgs/greenbone.png";
 
-SwiperCore.use([ Navigation, Pagination ]);
-
 export const SliderSection = () => {
     const [slides, setSlides] = useState([
-        { idx: 0, active: true },
-        { idx: 1, active: false }
+        { 
+            idx: 0, 
+            active: true, 
+            logos: [
+                { id: "ext", style: { width: 190, height: 54 }, src: extocode },
+                { id: "sec", style: { width: 189, height: 51 }, src: Secure2Fibe },
+                { id: "an",  style: { width: 189, height: 72 }, src: anschlusswerk },
+                { id: "allied", style: { width: 189, height: 18 }, src: WhiteAllied },
+                { id: "ripe", style: { width: 189, height: 33 }, src: RipeNCC },
+                { id: "nak", style: { width: 154, height: 24 }, src: nakivo }
+            ]  
+        },
+        { 
+            idx: 1, 
+            active: false,
+            logos: [
+                { id: "nord", style: { width: 189, height: 60 }, src: nordane },
+                { id: "mg", style: { width: 189, height: 53 }, src: mgfuture },
+                { id: "qua", style: { width: 189, height: 37 }, src: quantum },
+                { id: "iu", style: { width: 189, height: 102 }, src: iusard },
+                { id: "st", style: { width: 189, height: 62 }, src: stortrec },
+                { id: "gr", style: { width: 189, height: 96 }, src: greenbone },
+            ] 
+        },
     ]);
-    const SliderRef = useRef(null);
+
     const WrapperRef = useRef(null);
+    const SlideRef = useRef(null);
+    const [offsetWidth, setOffsetWidth] = useState(0);
+    const [currentIndex, setCurrentIndex] = useState({
+        current: 1,
+        real: 0
+    });
+    const [isAnimating, setIsAnimating] = useState(true);
 
-    const handleRowClick = (row) => {
+    useEffect(() => {
+        setOffsetWidth(SlideRef.current.offsetWidth);
+    }, [offsetWidth]);
 
-        if (typeof row === "number") {
-            reloadPagination(row);
-            handleTranslation();
-        } else {
-            const activeSlide = slides.find((slide) => slide.active === true).idx;
-            
-            if (activeSlide === 0 && row === "right") {
-                reloadPagination(1);
-            } else if (activeSlide === 1 && row === "left") {
-                reloadPagination(0);
-            } else if (activeSlide === 0 && row === "left") {
-                reloadPagination(1);
-            } else if (activeSlide === 1 && row === "right") {
-                reloadPagination(0);
+    const handleRowClick = (direction) => {
+        if (isAnimating) return; 
+        setIsAnimating(true);
+
+        setCurrentIndex((prevIndex) => {
+            let newIndex = { current: 0, real: 0 }
+
+            if (prevIndex.real === slides.length - 1) {
+                newIndex.real = slides[0].idx;
+            } else {
+               newIndex.real = slides[slides.length - 1].idx;
             }
 
-            handleTranslation();
-        }
-    }
+            actualActiveSlide(newIndex.real);
 
-    const reloadPagination = (row) => {
-        setSlides((slides) => {
-            let slidesArray = [];
+            if (direction === "right") {
+                newIndex.current = prevIndex.current + 1;
+            } else {
+                newIndex.current = prevIndex.current - 1;
+            }
+
+            return newIndex;
+        });
+    };
+
+    const actualActiveSlide = (idx) => {
+        setSlides(slides => {
+            let newSlides = [];
 
             slides.forEach((slide) => {
-
-                if (slide.idx === row) {
-                    slidesArray.push({ ...slide, active: true });
+                if (slide.idx === idx) {
+                    newSlides.push({ ...slide, active: true });
                 } else {
-                    slidesArray.push({ ...slide, active: false });
+                    newSlides.push({ ...slide, active: false });
                 }
-
-                return slidesArray;
             })
 
-            return slidesArray;
-        });
+            return newSlides;
+        })
     }
 
-    const handleTranslation = () => {
-        const wrapper = WrapperRef.current;
-        const transform = window.getComputedStyle(wrapper).transform;
-        let transformNumber = null;
+    useEffect(() => {
+        if (isAnimating) {
+            const timeout = setTimeout(() => {
+                setIsAnimating(false);
 
-        if (transform !== "none") {
-            transformNumber = transform
-                  .match(/matrix\(([^)]+)\)/)[1]
-                  .split(',')
-                  .map(Number)[4];
+                setCurrentIndex((prevIndex) => {
+                    if (prevIndex.current === 0) {
+                        return { ...prevIndex, current: slides.length }; 
+                    } else if (prevIndex.current === slides.length + 1) {
+                        return { ...prevIndex, current: 1 }; 
+                    }
+
+                    return prevIndex;
+                });
+            }, 1000); 
+
+            return () => clearTimeout(timeout);
         }
-
-        if (typeof transformNumber === "number" && transformNumber < 0) {
-            wrapper.style.transform = `translateX(0px)`;
-            transformNumber = null;
-            return;
-        } else {
-            wrapper.style.transform = `translateX(-${SliderRef.current.offsetWidth}px)`; 
-        }  
-    }
+    }, [isAnimating, slides.length]);
     
-
     return (
         <SliderContainer>
             <SliderContainerH2>Unsere Partner</SliderContainerH2>
-            {/*
             <Slider>
-                <SliderWrapper ref={WrapperRef}>
-                    {slides.map((slide) => {
-                        if (slide.idx === 0) {
-                            return (
-                                <SliderSlide ref={SliderRef} key={slide.idx}>
-                                    <Img id="ext" style={{ width: "184px", height: "54px" }} src={extocode} />
-                                    <Img id="sec" style={{ width: "189px", height: "51px" }} src={Secure2Fibe} />
-                                    <Img id="an" style={{ width: "189px", height: "72px" }} src={anschlusswerk} />
-                                    <Img id="allied" style={{ width: "189px", height: "18px" }} src={WhiteAllied} />
-                                    <Img id="ripe" style={{ width: "189px", height: "33px" }} src={RipeNCC} />
-                                    <Img id="nak" style={{ width: "154px", height: "24px" }} src={nakivo} />
-                                </SliderSlide>
-                            )
-                        } else {
-                            return (
-                                <SliderSlide key={slide.idx}>
-                                    <Img id="nord" style={{ width: "189px", height: "60px" }} src={nordane} />
-                                    <Img id="mg" style={{ width: "189px", height: "53px" }} src={mgfuture} />
-                                    <Img id="qua" style={{ width: "189px", height: "37px" }} src={quantum} />
-                                    <Img id="iu" style={{ width: "189px", height: "102px" }} src={iusard} />
-                                    <Img id="st" style={{ width: "189px", height: "62px" }} src={stortrec} />
-                                    <Img id="gr" style={{ width: "189px", height: "96px" }} src={greenbone} />
-                                </SliderSlide>
-                            )
-                        }
-                    })}
+                <SliderWrapper 
+                    ref={WrapperRef}
+                    translateX={-currentIndex.current * 100}   
+                    isAnimating={isAnimating} 
+                >
+                    <SliderSlide>
+                        {slides[slides.length - 1].logos.map((item) => (
+                            <Img src={item.src} imgstyle={item.style} />
+                        ))}
+                    </SliderSlide>
+
+                    {slides.map((slide) => (
+                        <SliderSlide ref={SlideRef} key={slide.idx}>
+                            {slide.logos.map((item) => (
+                                <Img src={item.src} imgstyle={item.style} />
+                            ))}
+                        </SliderSlide>
+                    ))}
+
+                    <SliderSlide>
+                        {slides[0].logos.map((item) => (
+                            <Img src={item.src} imgstyle={item.style} />
+                        ))}
+                    </SliderSlide>
                 </SliderWrapper>
             </Slider>
             <SliderRow id="left" style={{ left: "1em" }} onClick={() => handleRowClick("left")}>
@@ -135,44 +155,7 @@ export const SliderSection = () => {
             <SliderRow id="right" style={{ right: "1em" }} onClick={() => handleRowClick("right")}>
                 <FontAwesomeIcon icon={faArrowRight} />
             </SliderRow>
-            <SliderDotsComponent slides={slides} onHandle={handleRowClick} /> */}
-            <Swiper
-                loop={true}
-                navigation={{
-                    nextEl: '.swiper-cstm-button-next',
-                    prevEl: '.swiper-cstm-button-prev',
-                }}
-                pagination={{
-                    el: '.swiper-pagination',
-                    clickable: true,
-                }}
-                slidesPerView={1}
-                spaceBetween={30}
-                slideClass="SliderSlideClass"
-            >
-                <SliderSlide className="SliderSlideClass">
-                    <Img id="ext" style={{ width: "184px", height: "54px" }} src={extocode} />
-                    <Img id="sec" style={{ width: "189px", height: "51px" }} src={Secure2Fibe} />
-                    <Img id="an" style={{ width: "189px", height: "72px" }} src={anschlusswerk} />
-                    <Img id="allied" style={{ width: "189px", height: "18px" }} src={WhiteAllied} />
-                    <Img id="ripe" style={{ width: "189px", height: "33px" }} src={RipeNCC} />
-                    <Img id="nak" style={{ width: "154px", height: "24px" }} src={nakivo} />
-                </SliderSlide>
-                <SliderSlide className="SliderSlideClass">
-                    <Img id="nord" style={{ width: "189px", height: "60px" }} src={nordane} />
-                    <Img id="mg" style={{ width: "189px", height: "53px" }} src={mgfuture} />
-                    <Img id="qua" style={{ width: "189px", height: "37px" }} src={quantum} />
-                    <Img id="iu" style={{ width: "189px", height: "102px" }} src={iusard} />
-                    <Img id="st" style={{ width: "189px", height: "62px" }} src={stortrec} />
-                    <Img id="gr" style={{ width: "189px", height: "96px" }} src={greenbone} />
-                </SliderSlide>
-                <SliderRow style={{ left: "1em" }} className="swiper-cstm-button-prev">
-                    <FontAwesomeIcon icon={faArrowLeft} />
-                </SliderRow>
-                <SliderRow style={{ right: "1em" }} className="swiper-cstm-button-next">
-                    <FontAwesomeIcon icon={faArrowRight} />
-                </SliderRow>
-            </Swiper>
+            <SliderDotsComponent slides={slides} onHandle={handleRowClick} currentIndex={currentIndex} />
         </SliderContainer>
     )
 }
@@ -195,6 +178,11 @@ const Img = styled.img`
     width: 1em;
     height: 1em;
     margin-right: .2em;
+
+    ${({ imgstyle }) => `
+        width: ${imgstyle.width}px;
+        height: ${imgstyle.height}px;
+    `}
 `;
 
 const SliderContainer = styled.section`
@@ -270,7 +258,14 @@ const Slider = styled.div`
     user-select: none;
     align-items: center;
 
-    transition: transform 0.3s ease-in-out;
+`;
+
+const SliderWrapper = styled.div`
+    width: 100%;    
+    display: flex;
+    flex-direction: row;
+    transform: ${({ translateX }) => `translateX(${translateX}%)`};
+    transition: ${({ isAnimating }) => isAnimating ? "transform 1s ease-in-out" : "0s"};
 `;
 
 const SliderSlide = styled.div`
