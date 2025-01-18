@@ -11,6 +11,7 @@ const PAGES = [
     { to: "/karriere", page: "Karriere" },
     { to: "/web/login", page: "Login" }
 ]
+
 const standartStyled = {
     top: "-100vh",
 }
