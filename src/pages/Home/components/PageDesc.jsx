@@ -61,6 +61,6 @@ const PageDescH3 = styled.h3`
 
     ${({ opacity }) => `
         opacity: ${opacity}%;
-        transition: 1s;
+        transition: 2s;
     `}
 `;

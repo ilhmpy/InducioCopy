@@ -5,6 +5,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Footer } from "./Footer";
 
+import { Media } from "../consts/Media";
+
 const PAGES = [
     { to: "/", page: "Home" },
     { to: "/contactus", page: "Kontakt" },
@@ -133,6 +135,10 @@ const NavigationMenuContainer = styled.div`
             `
         }
     }}
+
+    @media (min-width: ${Media.desktop.mittel.min}px) {
+        height: 5em;
+    }
 `;
 
 const Logo = styled.img`
@@ -161,6 +167,10 @@ const ComponentLink = styled.span`
     ${({ active }) => active ? `
         color: #000;
     ` : ``}
+
+    @media (min-width: ${Media.desktop.mittel.min}px) {
+        font-size: 1.5em;
+    }
 `;
 
 const NavigationLinksButton = styled.button`

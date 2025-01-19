@@ -124,11 +124,13 @@ const YearsItem = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    user-select: none;
 `;
 
 const YearsText = styled.div`
     font-size: 1.1em;
     font-weight: 500;
+    user-select: none;
 `;
 
 const YearsItemContainer = styled.div`
