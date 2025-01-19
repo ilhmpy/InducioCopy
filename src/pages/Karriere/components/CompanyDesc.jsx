@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Container } from "../../../components/Container";
 
-import karriere from "../../../imgs/karriere.png";
+import karriere from "../../../imgs/karrierePNG.png";
 
 export const CompanyDesc = () => {
     return (
