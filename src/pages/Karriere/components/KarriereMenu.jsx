@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useEffect, useRef, useState } from "react";
 import { Container } from "../../../components";
 
-import benefits from "../../../imgs/benefits.webp";
+import benefits from "../../../imgs/benefits.svg";
  
 export const KarriereMenu = () => {
     const menuRef = useRef();
