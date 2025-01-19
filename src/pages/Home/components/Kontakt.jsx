@@ -22,7 +22,7 @@ export const Kontakt = () => {
 
 const KontaktContainer = styled.section`
     width: 100%;
-    height: auto;
+    height: 35vh;
     min-height: 45em;
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;

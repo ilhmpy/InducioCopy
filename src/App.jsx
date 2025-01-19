@@ -3,9 +3,6 @@ import { Anmeldung, Home, Karriere, Kontakt } from "./pages";
 import React from "react";
 import { Navigation } from "./components";
 
-// приклеить футер
-// сделать анимацию типа их статистика в цифрах с нуля стает заранее заготовленным числом
-
 const App = () => {
   const routing = useRoutes([
     { 

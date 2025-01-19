@@ -14,19 +14,22 @@ export const YearsStatistic = () => {
         {
             title: "Jahre Erfahrung",
             lastNumber: 15,
-            ref: YearsRef
+            ref: YearsRef,
+            px: 10
         },
     
         { 
             title: "Mitarbeiter",
             lastNumber: 25,
-            ref: WorkersRef
+            ref: WorkersRef,
+            px: 16
         },
     
         {
             title: "zufriedene Kunden",
             lastNumber: 50,
             ref: ClientsRef,
+            px: 30,
             plus: true,
         }
     ]);
@@ -57,10 +60,11 @@ export const YearsStatistic = () => {
             ) {
                 STATISTIC.forEach((statt) => {
                     const itemHeight = Number(parseFloat(window.getComputedStyle(statt.ref.current).height));
-                    const translate = itemHeight * statt.lastNumber;
+                    const translate = itemHeight * statt.lastNumber + statt.px;
 
-                    console.log(translate);
-                    statt.ref.current.style.transform = `translateY(-${translate + 5}px)`;
+
+                    console.log(translate, itemHeight);
+                    statt.ref.current.style.transform = `translateY(-${translate}px)`;
                 });
               }
         }
@@ -116,6 +120,10 @@ const YearsStatisticItem = styled.div`
 const YearsItem = styled.div`
     font-size: 3.2em;
     line-height: 1.2em;
+    height: 1.2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 const YearsText = styled.div`

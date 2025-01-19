@@ -37,11 +37,19 @@ export const Anmeldung = () => {
 
 const AnmeldungContainer = styled.section`
     width: 100%;
-    height: 30em;
+    height: 60vh;
     background: #FFFF;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media (min-width: 1800px)  {
+        height: 80vh;
+    }
+
+    @media (min-width: 4000px) {
+        height: 100vh;
+    }
 `;
 
 const AnmeldungForm = styled.div`
